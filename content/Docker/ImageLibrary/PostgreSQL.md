@@ -6,7 +6,7 @@
 
 > Никогда в разработке не используйте пробелы и спец.символы в именах файлов и каталогов!
 
-Запуск PostgreSQL с паролем
+Запуск **PostgreSQL** с паролем
 
 в **Windows Powershell**
 ```shell
@@ -17,6 +17,8 @@ docker run -d `
   postgres:alpine
 ```
 
+> Если эта команда в Powershell не работает, то удалите из кода апострофы `
+
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell
 docker run -d \
@@ -26,7 +28,7 @@ docker run -d \
   postgres:alpine
 ```
 
-Подключиться через psql
+Подключиться через `psql`
 ```shell
 docker exec -it my-postgres psql -U postgres
 ```

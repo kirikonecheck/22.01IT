@@ -20,6 +20,8 @@ docker run -d `
   portainer/portainer-ce:latest
 ```
 
+> Если эта команда в Powershell не работает, то удалите из кода апострофы `
+
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell
 docker run -d \

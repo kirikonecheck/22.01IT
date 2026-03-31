@@ -16,6 +16,8 @@ docker run -d `
   mongo:latest
 ```
 
+> Если эта команда в Powershell не работает, то удалите из кода апострофы `
+
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell
 docker run -d \
@@ -23,6 +25,7 @@ docker run -d \
   -p 27017:27017 \
   mongo:latest
 ```
+
 2. Подключиться через shell
 ```shell
 docker exec -it my-mongo mongosh

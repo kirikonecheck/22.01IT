@@ -21,6 +21,8 @@ docker run -d `
   nginx:alpine
 ```
 
+> Если эта команда в Powershell не работает, то удалите из кода апострофы `
+
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell
 docker run -d \
@@ -29,6 +31,7 @@ docker run -d \
   -v $(pwd):/usr/share/nginx/html \
   nginx:alpine
 ```
+
 3. Проверьте
 ```shell
 curl http://localhost:8082/test.txt

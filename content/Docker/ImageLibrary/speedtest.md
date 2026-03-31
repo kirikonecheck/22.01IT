@@ -4,7 +4,7 @@
 
 > Никогда в разработке не используйте пробелы и спец.символы в именах файлов и каталогов!
 
-1. Speedtest в Docker
+1. **Speedtest** в **Docker**
 ```shell
 docker run -d -p 158:80 --name speedtest-server adolfintel/speedtest
 ```

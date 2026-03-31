@@ -10,7 +10,7 @@
 
 ### Создаём папку для данных (если её нет)
 
-#### Для Linux/macOS:
+#### Для Git-Bash/Linux/macOS:
 
 ```shell
 mkdir -p ~/insolante_data
@@ -34,6 +34,8 @@ docker run --rm -p 8081:5000 -d `
   -v ~/insolante_data:/opt/core/data `
   ngargaud/insolante
 ```
+
+> Если эта команда в Powershell не работает, то удалите из кода апострофы `
 
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell

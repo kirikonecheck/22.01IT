@@ -20,6 +20,8 @@ docker run -d `
   mysql:8
 ```
 
+> Если эта команда в Powershell не работает, то удалите из кода апострофы `
+
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell
 docker run -d \
@@ -31,6 +33,7 @@ docker run -d \
   -e MYSQL_PASSWORD=password \
   mysql:8
 ```
+
 2. Подключиться
 ```shell
 docker exec -it my-mysql mysql -u root -p
