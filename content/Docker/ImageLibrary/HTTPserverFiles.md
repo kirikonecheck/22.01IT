@@ -17,7 +17,7 @@ echo "Hello from HTTP server" > test.txt
 docker run -d `
   --name http-server `
   -p 8082:80 `
-  -v $(pwd):/usr/share/nginx/html `
+  -v ${PWD}:/usr/share/nginx/html `
   nginx:alpine
 ```
 

@@ -20,7 +20,7 @@
 
 > [Минимальные и рекомендуемые технические требования для рабочего пространства современного it-студента](https://gitflic.ru/project/rurewa/cpp/file?branch=master)
 
-## Навигация по документу
+## Навигация по документу (GOTO)
 
 - [Git](#git)
 - [WSL 2.0 для Windows 10/11](#wsl-20-для-windows-1011-может-понадобиться-для-работы-с-docker-etc)
@@ -50,7 +50,7 @@
 1. **Virtual Box** - для установки **Alt Образование 11** - для контроллера домена (групповые политики) - пока не обязательно!
 [Virtual Box](https://www.oracle.com/virtualization/virtualbox/) или в **PowerShell** - `winget install --id=Oracle.VirtualBox -e`
     - [Альт Образование 11 для виртуальной машины](https://download.basealt.ru/pub/distributions/ALTLinux/p11/images/education/x86_64/alt-education-11.0-x86_64.iso) - пока не обязательно!
-1. Нейросети [DeepSeek](https://chat.deepseek.com/) и [Cursor](https://cursor.com/)
+1. Нейросети [DeepSeek](https://chat.deepseek.com/), [Qwen](https://chat.qwen.ai/) и [Cursor](https://cursor.com/)
 
 > Периодически следует обновлять все установленные пользователем приложения. Это удобней делать через **PowerShell** командой `winget upgrade --all`
 

@@ -13,10 +13,10 @@
 в **Windows Powershell**
 ```shell
 docker run -d `
-  --name file-server `
+  --name my-apache-server `
   -p 8084:80 `
-  -v $(pwd):/srv `
-  halverneus/static-file-server:latest
+  -v "$(PWD):/usr/local/apache2/htdocs/" `
+  httpd:alpine
 ```
 
 > Если эта команда в Powershell не работает, то удалите из кода апострофы `
@@ -24,10 +24,10 @@ docker run -d `
 в **Git-Bash/Linux/WSL 2.0/Mac**
 ```shell
 docker run -d \
-  --name file-server \
+  --name my-apache-server \
   -p 8084:80 \
-  -v $(pwd):/srv \
-  halverneus/static-file-server:latest
+  -v "$(pwd):/usr/local/apache2/htdocs/" \
+  httpd:alpine
 ```
 2. [Откройте: http://localhost:8084](http://localhost:8084)
 

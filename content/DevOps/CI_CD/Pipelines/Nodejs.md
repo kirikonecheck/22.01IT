@@ -1,6 +1,6 @@
 ## Pipeline CI на Node.js в GitHub Actions
 
-**Цель** — учебный пример — простой проект, который можно склонировать, настроить и убедиться, что GitHub Actions работает
+**Цель** — учебный пример — простой проект, который можно склонировать, настроить и убедиться, что приложение в контейнере с Node.js, и GitHub Actions работает
 
 ### 1. Создайте на **GitHub** новый публичный репозиторий `my-node-app` с `README.md`
 
@@ -17,14 +17,15 @@ my-node-app/
 ├── tests/
 │   └── index.test.js       # тесты (Jest)
 ├── package.json            # зависимости и скрипты
+├──.eslintrc.json
 ├── Dockerfile
 └── README.md
 ```
 
-Структуру проекта можно сделать одной bash-командой, которая автоматически создаст всю структуру проекта:
+Структуру проекта можно сделать одной bash-командой, которая автоматически создаст все файлы и каталоги проекта:
 ```shell
 mkdir -p .github/workflows src tests && \
-touch .github/workflows/ci.yml src/index.js tests/index.test.js package.json Dockerfile README.md
+touch .github/workflows/ci.yml src/index.js tests/index.test.js package.json .eslintrc.json Dockerfile README.md
 ```
 
 ### 2. Файл `package.json` (зависимости и скрипты)
@@ -101,71 +102,92 @@ jobs:
   test:
     name: Lint & Test
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint with ESLint
-        run: npm run lint
-
-      - name: Test with Jest
-        run: npm test
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
 
   docker-build:
     name: Build Docker Image (no push)
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build Docker image
-        run: docker build -t my-node-app:test .
+      - uses: actions/checkout@v4
+      - run: docker build -t my-node-app:test .
 ```
 
-### 6. Проверить сборку онлайн
+### 6. Конфигурационного файл `.eslintrc.json`
+```json
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    "no-unused-vars": "warn"
+  }
+}
+```
+
+Что делает этот конфиг?
+- env – говорит ESLint, что код выполняется в среде Node.js и используются глобальные переменные Jest (describe, test, expect и т.д.), чтобы не было ложных предупреждений.
+- extends: "eslint:recommended" – включает набор рекомендуемых правил.
+- parserOptions – указывает современную версию JavaScript (ECMAScript 2021).
+- rules – настраивает правило: предупреждать о неиспользуемых переменных, но не прерывать выполнение.
+
+### 7. Сгенерировать в папке `my-node-app` файл `package-lock.json` через `Docker` (без локальной установки `Node.js`)
+
+> ### Вам не нужно устанавливать Node.js на свою ОС. Используйте Docker, который у вас уже есть!
+
+```shell
+docker run --rm -v "$(pwd):/app" -w /app node:18-alpine npm install --package-lock-only
+```
+
+### 8. Проверить сборку онлайн
 
 - Закоммитьте и запушите в строго в ветку `main` этот файл в ваш репозиторий
 - Перейдите на вкладку **Actions** в вашем репозитории на **GitHub**. Вы увидите, как ваш **Workflow** запустился, а через минуту загорится **зеленая** галочка, которая означает, что все шаги прошли успешно
 
-![Скрин](/content/DevOps/CI_CD/img)
+![Скрин](/content/DevOps/CI_CD/img/4_workflow.png)
 
 ### 7. Проверить сборку Docker-образа локально
 
 На своём компьютере, находясь в папке `my-node-app` этого репозитория выполнить:
 
-борка проекта в Docker-образ
+Сборка проекта в Docker-образ
 ```shell
-
+docker build -t my-node-app:latest .
 ```
 Создание и запуск контейнера:
 ```shell
-
+docker run --rm my-node-app:latest
 ```
 
-Вы увидите вывод:
+Вы увидите вывод: `Hello from Node.js app!`
 
-![Hello from my Python app!](/content/DevOps/CI_CD/img)
+![Hello from my Python app!](/content/DevOps/CI_CD/img/3_workflow.png)
 
-Опционально вы можете зайти в созданный вами контейнер для ознакомления
+Опционально вы можете зайти в интерактивный режим контейнера для ознакомления и отладки:
 ```shell
-
+docker run --rm -it my-node-app:latest /bin/sh
+```
+выйти из контейнра:
+```shell
+exit
 ```
 
 > Если вы обнаружили ошибку в этом тексте - сообщите пожалуйста автору!

@@ -13,9 +13,9 @@
 
 Запустите **Adminer** в **Windows Powershell**
 ```shell
-docker run -d
-  --name adminer
-  -p 8084:8080
+docker run -d `
+  --name adminer `
+  -p 8084:8080 `
   adminer:latest
 ```
 

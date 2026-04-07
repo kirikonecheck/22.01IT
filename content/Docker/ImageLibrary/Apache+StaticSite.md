@@ -37,7 +37,7 @@ echo '<h1>Hello Docker!</h1>' > index.html
 docker run -d `
   --name my-apache `
   -p 8081:80 `
-  -v $(pwd):/usr/local/apache2/htdocs `
+  -v ${PWD}:/usr/local/apache2/htdocs `
   httpd:alpine
 ```
 
