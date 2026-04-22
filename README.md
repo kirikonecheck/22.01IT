@@ -137,7 +137,7 @@ git config --global user.email "rosa@mail.ru"
 
 > Если компьютер не тянет в **WSL 2.0** и **Docker**, то можно ограничется [Codespace](https://github.com/features/codespaces) (но не желательно, т.к. очень ограниченный функционал!)
 
-> Для лучшего выполнения создания и запуска контейнеров можно использовать установленную в **WSL** систему **Ubuntu**, которую можно вызвать из **Главного меню**. Чтобы **VS Code** мог работать с **Ubuntu**, нужно в нём установить расширение **WSL** и запускать **VS Code** из командной строки **Ubuntu** командой `.code`
+> Для лучшего выполнения создания и запуска контейнеров можно использовать установленную в **WSL** систему **Ubuntu**, которую можно вызвать из **Главного меню**. Чтобы **VS Code** мог работать с **Ubuntu**, нужно в нём установить расширение **WSL** и запускать **VS Code** из командной строки **Ubuntu** командой `code .`
 
 [Образовательные материалы по **Docker** для начинающих](/content/Docker/README.md)
 
@@ -179,7 +179,12 @@ git config --global user.email "rosa@mail.ru"
 - [XML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml)
 - [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
 
-Открыть и закрыть интегрированный терминал **VS Code** по команде **Ctrl+~**
+Открыть и закрыть интегрированный терминал **VS Code** по команде **Ctrl+~** (контрл тильда)
+
+Для запуска **VS Code** в **WSL** (Ubuntu) в Windows выполните в терминале **Ubuntu** команду:
+```shell
+code .
+```
 
 [Подробней о настройках VSCode](https://gitflic.ru/project/rurewa/education/blob?file=content/Programming/VCode.md&branch=master&mode=markdown)
 

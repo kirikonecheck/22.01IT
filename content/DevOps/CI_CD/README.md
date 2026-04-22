@@ -7,7 +7,7 @@
     - [Node.js / TypeScript – REST API с тестами](/content/DevOps/CI_CD/Pipelines/NodeJS.md)
     - [Go](/content/DevOps/CI_CD/Pipelines/Go.md)
     - [Rust - консольная утилита с тестами и линтингом](/content/DevOps/CI_CD/Pipelines/Rust.md)
-    - [PHP с MySQL – приложение с базой данных](/content/DevOps/CI_CD/Pipelines/PHP_MySQL.md)
+    - [PHP с MySQL – приложение с базой данных](/content/DevOps/CI_CD/Pipelines/PHP.md)
     - [C++](/content/DevOps/CI_CD/Pipelines/cpp.md)
 - CD
     - []()
