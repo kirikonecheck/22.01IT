@@ -234,6 +234,8 @@ Ubuntu WSL
 Bash (Linux)
 ```
 
+![alt text](image-7.png)
+
 ## 📚 Полезные команды
 
 ```bash
