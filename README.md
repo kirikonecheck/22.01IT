@@ -31,7 +31,7 @@
 
 - [Git](#git)
 - [WSL 2.0 для Windows 10/11](#wsl)
-- [Docker](#docker-разработка-тестирование-и-запуск-различного-по)
+- [Docker](#docker)
 - [Virtual Box/Hyper V](/content/Linux/README.md)
 - [Минимальные настройки VSCode](#vscode)
 - [Zed](#zed)
@@ -53,7 +53,11 @@
     ```shell
     winget install --id=zyedidia.micro -e
     ```
-    - Установитьв **Alt Linux 11**:
+    - Установить **Ubuntu WSL**:
+    ```shell
+    sudo apt update && sudo apt install micro xclip xsel
+    ```
+    - Установить **Alt Linux 11**:
     ```shell
     su - -c "epmi --auto micro xclip xsel wl-clipboard"
     ```
@@ -69,7 +73,7 @@
 1. Создать публичный репозиторий с `README.md` на [gitflic.ru](gitflic.ru) или [Github](github.com)
 1. **Dia** [Dia](https://ru.wikipedia.org/wiki/Dia) - `winget install gnome.Dia` (опционально)
 1. **VSCode** [VSCode](https://code.visualstudio.com/) или в **PowerShell** - `winget install Microsoft.VisualStudioCode`
-1. [Zed](https://zed.dev/?ref=taaft) - это высокопроизводительный, многопользовательский редактор кода с открытым исходным кодом со встроенным ИИ.
+1. [Zed](https://zed.dev/?ref=taaft) - опционально - это высокопроизводительный, многопользовательский редактор кода с открытым исходным кодом со встроенным ИИ.
     - Установка в **Windows** (PowerShell - Администратор):
     ```shell
     winget install -e --id ZedIndustries.Zed
@@ -88,8 +92,8 @@
 1. **Docker** - Для **Windows** [Загрузить и установить Docker-Desktop](https://www.docker.com/products/docker-desktop/) или в **PowerShell** - `winget install Docker.DockerDesktop`. [Для Linux](/content/Linux/README.md)
 1. **Virtual Box** - для установки **Alt Образование 11** - для контроллера домена (групповые политики)
 [Virtual Box](https://www.oracle.com/virtualization/virtualbox/) или в **PowerShell** - `winget install --id=Oracle.VirtualBox -e`
-    - [Альт Образование 11 для виртуальной машины](https://download.basealt.ru/pub/distributions/ALTLinux/p11/images/education/x86_64/alt-education-11.0-x86_64.iso) - пока не обязательно!
-1. **Obsidian** - развитая система личных заметок. Второй мозг it-шника и программиста.
+    - [Альт Образование 11 для виртуальной машины](https://download.basealt.ru/pub/distributions/ALTLinux/p11/images/education/x86_64/alt-education-11.0-x86_64.iso) - опционально!
+1. **Obsidian** - опционально - развитая система личных заметок. Второй мозг it-шника и программиста.
     - Установка в **Windows** (PowerShell - Администратор):
     ```shell
     winget install -e --id Obsidian.Obsidian
@@ -109,7 +113,7 @@
 Кроме этого, с помощью **WinGet** можно одновременно устанавливать сразу несколько выбранных приложений, например:
 
 ```shell
-winget install Microsoft.Teams Git.Git Microsoft.VisualStudioCode Docker.DockerDesktop LLVM.LLVM gnome.Dia
+winget install Microsoft.Teams Git.Git Microsoft.VisualStudioCode Docker.DockerDesktop LLVM.LLVM gnome.Dia --id=zyedidia.micro -e
 ```
 
 ---
@@ -126,7 +130,7 @@ git config --global core.editor "micro"
 ```
 Представиться системе **Git**:
 ```shell
-git config --global user.name "Rosa"
+git config --global user.name "Ваше_имя"
 ```
 > где вместо **Rosa** - ваш **username**
 ```shell
@@ -166,7 +170,7 @@ git config --global user.email "rosa@mail.ru"
             - Установить поддержку `g++` и `clang++` в терминале **Ubuntu**: `sudo apt update && sudo apt install -y build-essential git gdb ascii clang mingw-w64`
             - Проверить работу **Ubuntu** командами:
             - `uname -a` - краткая информация о системе
-            - `neofetch` - красивая информация о системе
+            - `neofetch` или `fastfetch` - наглядная ин-фа о системе
             - `htop` - процессы в режиме реального времени. Выйти по **Q** или **Ctrl+C**
             - `sl`
             - `ascii -d`
@@ -183,7 +187,7 @@ git config --global user.email "rosa@mail.ru"
 
 (Разработка, тестирование и запуск различного ПО)
 
-1. [Сначал включите **WSL** на своём компьютере!](#wsl-20-для-windows-10-и-11)
+1. [Сначал включите **WSL** на своём компьютере!](#wsl)
 1. [Загрузить и установить Docker-Desktop](https://www.docker.com/products/docker-desktop/) или командой в **PowerShell** `winget install Docker.DockerDesktop`
 1. Выполнять авторизацию в **Docker-Desktop** не обязательно (можно пропустить или авторизироваться через Google), указать `personal`;
 1. Перезагрузить компьютер;
@@ -256,7 +260,7 @@ code .
 - Горячие клавиши
     - `Ctrl+~` Открыть/Закрыть интегрированный Терминал
     - `Ctrl+/` Комментарии кода
-    - Ctrl+, Открыть настройки редактора
+    - `Ctrl+`, Открыть настройки редактора
 - Шрифты
     - `Settings`->`Appeance` - Font Family
     - Шрифт - `Droid Sans Mono`,` `monospace`
