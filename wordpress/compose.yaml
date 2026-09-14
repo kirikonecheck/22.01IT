@@ -1,0 +1,51 @@
+#version: '3.9' # Современные версии могут не требовать эту строку
+services:
+  # Сервис базы данных
+  db:
+    # Используем официальный образ MySQL 8.0
+    image: mysql:8.0
+    # Контейнер всегда будет перезапускаться, если остановится
+    restart: unless-stopped
+    environment:
+      # Обязательные переменные для MySQL
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+      # Сохраняем данные базы данных в Docker-томе
+      - db_data:/var/lib/mysql
+    networks:
+      - wp-network
+
+  # Сервис WordPress
+  wordpress:
+    # Зависит от сервиса db, будет запущен после него
+    depends_on:
+      - db
+    # Используем официальный образ WordPress с Apache
+    image: wordpress:latest
+    # Пробрасываем порт 8080 на хосте на порт 80 в контейнере
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    environment:
+      # Переменные для подключения к базе данных
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      # Сохраняем файлы плагинов, тем и загрузок
+      - wordpress_data:/var/www/html
+    networks:
+      - wp-network
+
+# Определяем сеть для связи контейнеров
+networks:
+  wp-network:
+
+# Определяем тома для сохранения данных
+volumes:
+  db_data:
+  wordpress_data:
