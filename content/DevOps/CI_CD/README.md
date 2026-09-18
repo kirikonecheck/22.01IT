@@ -9,6 +9,8 @@
     - [Rust - консольная утилита с тестами и линтингом](/content/DevOps/CI_CD/Pipelines/Rust.md)
     - [PHP с MySQL – приложение с базой данных](/content/DevOps/CI_CD/Pipelines/PHP.md)
     - [C++](/content/DevOps/CI_CD/Pipelines/cpp.md)
+    - [Hello Java!](/content/DevOps/CI_CD/Pipelines/hello_java.md)
+    - []()
 - CD
     - []()
     - []()

@@ -106,6 +106,17 @@ flowchart TD
 └───────────┘ посещает└───────────┘
 ```
 
+```mermaid
+flowchart LR
+    ST["СТУДЕНТ"]
+    CR["КУРС"]
+
+    ST -- "M:N" --> CR
+
+    style ST fill:none,stroke:#000,stroke-width:2px,color:#000
+    style CR fill:none,stroke:#000,stroke-width:2px,color:#000
+```
+
 ---
 
 ## 🔗 Типы связей (мощность связи, cardinality)
@@ -133,6 +144,16 @@ flowchart TD
 │  ГРУППА   │────1:M──│  СТУДЕНТ  │
 └───────────┘         └───────────┘
 ```
+```mermaid
+flowchart LR
+    GR["ГРУППА"]
+    ST["СТУДЕНТ"]
+    
+    GR -- "1:M" --> ST
+    
+    style GR fill:none,stroke:#000,stroke-width:2px,color:#000
+    style ST fill:none,stroke:#000,stroke-width:2px,color:#000
+```
 
 ---
 
@@ -147,6 +168,11 @@ flowchart TD
 ┌───────────┐         ┌───────────┐
 │  СТУДЕНТ  │────M:N──│   КУРС    │
 └───────────┘         └───────────┘
+```
+
+```mermaid
+erDiagram
+    STUDENT }o--o{ COURSE : "M:N"
 ```
 
 ⚠️ **Важно:** Связь M:N **не может быть напрямую реализована** в реляционной БД. На этапе логического проектирования она разрешается через **промежуточную (ассоциативную) таблицу**.
@@ -194,6 +220,22 @@ flowchart TD
 
 **Плюс:** Компактная, используется в профессиональных CASE-средствах (ERwin, DBeaver, dbdiagram.io).
 **Минус:** Менее наглядна для новичков.
+
+```mermaid
+erDiagram
+    GRUPPA ||--o{ STUDENT : "1:M"
+
+    GRUPPA {
+        int ID PK
+        string Nazvanie
+    }
+
+    STUDENT {
+        int ID PK
+        string Familiya
+        int Gruppa_ID FK
+    }
+```
 
 ---
 
@@ -253,6 +295,74 @@ flowchart TD
                       │ Фамилия     │
                       │ Имя         │
                       └─────────────┘
+```
+
+```mermaid
+flowchart TD
+    %% Определение узлов
+    CHIT["┌─────────────┐<br>│  ЧИТАТЕЛЬ   │<br>│─────────────│<br>│ ID (PK)     │<br>│ Фамилия     │<br>│ Имя         │<br>│ Телефон     │<br>└─────────────┘"]
+
+    VYD["┌─────────────┐<br>│   ВЫДАЧА    │<br>│─────────────│<br>│ ID (PK)     │<br>│ Читатель_ID │<br>│ ISBN        │<br>│ Дата_выдачи │<br>│ Дата_возвр. │<br>└─────────────┘"]
+
+    KNIGA["┌─────────────┐<br>│    КНИГА    │<br>│─────────────│<br>│ ISBN (PK)   │<br>│ Название    │<br>│ Год         │<br>└─────────────┘"]
+
+    AVTORSTVO["┌─────────────┐<br>│  АВТОРСТВО  │<br>│─────────────│<br>│ ID (PK)     │<br>│ Автор_ID    │<br>│ ISBN        │<br>└─────────────┘"]
+
+    AVTOR["┌─────────────┐<br>│    АВТОР    │<br>│─────────────│<br>│ ID (PK)     │<br>│ Фамилия     │<br>│ Имя         │<br>└─────────────┘"]
+
+    %% Связи
+    CHIT -- "1:∞" --> VYD
+    VYD -- "∞:1" --> KNIGA
+    KNIGA -- "M:N" --> AVTORSTVO
+    AVTORSTVO -- "∞:1" --> AVTOR
+
+    %% Чёрно-белый стиль
+    style CHIT fill:none,stroke:#000,stroke-width:2px,color:#000
+    style VYD fill:none,stroke:#000,stroke-width:2px,color:#000
+    style KNIGA fill:none,stroke:#000,stroke-width:2px,color:#000
+    style AVTORSTVO fill:none,stroke:#000,stroke-width:2px,color:#000
+    style AVTOR fill:none,stroke:#000,stroke-width:2px,color:#000
+```
+
+```mermaid
+erDiagram
+    CHITATEL ||--o{ VYDACHA : "poluchaet"
+    KNIGA ||--o{ VYDACHA : "vydaetsya"
+    KNIGA ||--o{ AVTORSTVO : "imeet"
+    AVTOR ||--o{ AVTORSTVO : "pishet"
+
+    CHITATEL {
+        int ID PK
+        string Familiya
+        string Imya
+        string Telefon
+    }
+
+    VYDACHA {
+        int ID PK
+        int Chitatel_ID FK
+        string ISBN FK
+        date Data_vydachi
+        date Data_vozvrata
+    }
+
+    KNIGA {
+        string ISBN PK
+        string Nazvanie
+        int God
+    }
+
+    AVTORSTVO {
+        int ID PK
+        int Avtor_ID FK
+        string ISBN FK
+    }
+
+    AVTOR {
+        int ID PK
+        string Familiya
+        string Imya
+    }
 ```
 
 ---
