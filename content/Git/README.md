@@ -62,17 +62,17 @@ git help
 
 **Сменить редактор по умолчанию:**
 
+На редактор кода **VS Code** (элементарный)
+```shell
+git config --global core.editor "code --wait"
+```
 На **Micro** (проще для новичков):
 ```shell
 git config --global core.editor "micro"
 ```
-На **Nano** (проще для новичков):
+На **Nano** (чуть сложней для новичков):
 ```shell
 git config --global core.editor "nano"
-```
-На **VS Code**:
-```shell
-git config --global core.editor "code --wait"
 ```
 
 **Представиться системе Git (выполняется однократно, после установки Git или перед 1-м коммитом)**
@@ -187,7 +187,7 @@ git pull && git push
 ```
 или более "мягкий" вариант
 ```shell
-git getch && git push
+git fetch && git push
 ```
 или, если не получилось с 1-го раза запушить, то:
 ```shell
@@ -270,9 +270,8 @@ git checkout master
 Показать информацию об удалённом репозитории
 
 Показать источники
-```git remote -v```
-
-```git remote show origin```
+- `git remote -v`
+- `git remote show origin`
 
 ### Работа с git-ветками
 
@@ -284,7 +283,7 @@ git branch
 ```shell
 git branch -r
 ```
-или
+или все ветки
 ```shell
 git branch --all
 ```
@@ -333,9 +332,7 @@ git push origin --delete test
 ```shell
 git switch master
 ```
-
 и выполняем слияние 2-х веток в одну
-
 ```shell
 git merge anybranch
 ```

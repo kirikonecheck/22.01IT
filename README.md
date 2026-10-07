@@ -22,7 +22,7 @@
 
 **Минимально-допустимые технические требования к рабочему пространству современного IT-студента**
 
-- Компьютер: CPU >= **Intel i3** или аналогичный от **AMD**, >= 8 Gb RAM, HDD/SSD >= 256 Gb + монитор > 19’ (диагональ);
+- Компьютер: CPU >= **Intel i3** 5-го поколения или аналогичный от **AMD**, >= 8 Gb RAM, HDD/SSD >= 256 Gb + монитор > 19’ (диагональ);
 - Операционная система - **Linux**: **Alt Linux 11** (лучше с KDE) или что-нибудь из семейства **Ubuntu** 22.04/24.04-64 bit (или её деривативы). **MacOS** 15 Sequoia+, **Windows** 10+ (версия 22H2 (сборка 19045), `WSL2.0` или другая виртуальная машина с **Linux**, например `Virtual Box`). Регистрация на [Github.com](github.com), [Gitflic.ru](gitflic.ru), [Яндекс](https://ya.ru/);
 - Хороший интернет;
 - Аудиогарнитура (наушники+микрофон).
@@ -124,9 +124,13 @@ winget install Microsoft.Teams Git.Git Microsoft.VisualStudioCode Docker.DockerD
 
 Открыть **Powersheell / Git-Bash / Terminal**
 
-Выбрать текстовый редактор **Micro** по умолчанию для **Windows/Linux**
+Выбрать текстовый редактор **VS Code** по умолчанию для **Windows/Linux**
 ```shell
-git config --global core.editor "micro"
+git config --global core.editor "code --wait"
+```
+В Windows может понадобиться другая команда:
+```powershell
+git config --global core.editor "'C:/Program Files/Microsoft VS Code/bin/code.cmd' --wait"
 ```
 Представиться системе **Git**:
 ```shell
@@ -154,7 +158,7 @@ git config --global user.email "rosa@mail.ru"
 
 - Включение дополнения `Подсистема Windows для Linux`
     - Выполнить `Win + R`, в диалоговом окне ввести `appwiz.cpl` и нажать **Enter**.
-    - `Программы и компоненты` -> `Включение и отключение дополнительных компонентов Windows` -> поставить флажок в `Подсистема Windows для Linux`
+    - `Программы и компоненты` -> `Включение и отключение дополнительных компонентов Windows` -> поставить флажок в **Подсистема Windows для Linux** и **Платформа виртуальной машины**
     - Или выполните в **Windows PowerShell** (Администратор) команду: `Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform`
     - Перезагрузить компьютер в PowerShell командой `Restart-Computer`
     - Запустить **Windows PowerShell** (Администратор)
@@ -166,7 +170,7 @@ git config --global user.email "rosa@mail.ru"
         - Перезагрузить компьютер
             - После перезагрузки найти **Ubuntu** можно из **Главного меню** и запустить её как обычное приложение **Windows**
             - Обновить **Ubuntu**: в терминале **Ubuntu** запустить команду `sudo apt list --upgradable -a && sudo apt update && sudo apt full-upgrade -y`
-            - Установить дополнительные утилиты в **Ubuntu**: в терминале **Ubuntu** запустить команду `sudo apt update && sudo apt install -y mc htop tree whois sl fastfetch wget curl inxi ncdu micro xclip xsel cmatrix`
+            - Установить дополнительные утилиты в **Ubuntu**: в терминале **Ubuntu** запустить команду `sudo apt update && sudo apt install -y mc htop tree whois sl fastfetch wget curl inxi ncdu micro xclip xsel cmatrix caca-utils lm-sensors nyancat net-tools`
             - Установить поддержку `g++` и `clang++` в терминале **Ubuntu**: `sudo apt update && sudo apt install -y build-essential git gdb ascii clang mingw-w64`
             - Проверить работу **Ubuntu** командами:
             - `uname -a` - краткая информация о системе
@@ -175,6 +179,8 @@ git config --global user.email "rosa@mail.ru"
             - `sl`
             - `ascii -d`
             - `inxi -F`
+            - `cmatrix`
+            - `cacafire`
     - Для старых версий **Windows 10**. **(Не обязательно!)** Если обновления **Ubuntu** завершаться ошибкой, то надо в **Windows PowerShell** (Администратор) задать версию **WSL 2** по умолчанию: `wsl --set-default-version 2`
 
 > Если компьютер не тянет для **WSL 2.0** и **Docker**, то можно попробовать выполнять задачи в [**Codespace**](https://github.com/features/codespaces) (но не желательно, т.к. очень ограниченный функционал!)
