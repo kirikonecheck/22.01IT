@@ -1,4 +1,4 @@
-## Индивидуальный проект статичесого сайта с CI/CD на GitHub Pages
+## Индивидуальный проект статического сайта с CI/CD на GitHub Pages
 
 [Пример](/content/DevOps/CI_CD/Pipelines/CI_Deploy_GitHub_Pages.md)
 
