@@ -23,7 +23,7 @@
 **Минимально-допустимые технические требования к рабочему пространству современного IT-студента**
 
 - Компьютер: CPU >= **Intel i3** 5-го поколения или аналогичный от **AMD**, >= 8 Gb RAM, HDD/SSD >= 256 Gb + монитор > 19’ (диагональ);
-- Операционная система - **Linux**: **Alt Linux 11** (лучше с KDE) или что-нибудь из семейства **Ubuntu** 22.04/24.04-64 bit (или её деривативы). **MacOS** 15 Sequoia+, **Windows** 10+ (версия 22H2 (сборка 19045), `WSL2.0` или другая виртуальная машина с **Linux**, например `Virtual Box`). Регистрация на [Github.com](github.com), [Gitflic.ru](gitflic.ru), [Яндекс](https://ya.ru/);
+- Операционная система - **Linux**: **Alt Linux 11** (лучше с KDE) или что-нибудь из семейства **Ubuntu** 22.04/24.04-64 bit (или её деривативы). **MacOS** 15 Sequoia+, **Windows** 10+ (версия 22H2 (сборка 19045), `WSL2.0` или другая виртуальная машина с **Linux**, например `Virtual Box`). Регистрация на [Github.com](https://github.com), [Gitflic.ru](https://gitflic.ru), [Яндекс](https://ya.ru/);
 - Хороший интернет;
 - Аудиогарнитура (наушники+микрофон).
 
@@ -42,16 +42,20 @@
 
 **Минимальные требования к студентам:**
 
-1. В учёбе по **IT** дисциплинам лучше использовать какой-нибудь **Linux**, например [Альт Образование 11](https://www.basealt.ru/alt-education)
+1. В учёбе по **IT** дисциплинам рекомендуется использовать какой-нибудь **Linux**, например [Альт Образование 11](https://www.basealt.ru/alt-education)
 1. Для пользователей **Linux** [инструкция по получению и настройке Альт Линукс Образование 11](/content/Linux/README.md)
 1. Для пользователей **Windows 10/11** установку приложений в **Windows** рекомендуется использовать [**WinGet**](https://learn.microsoft.com/ru-ru/windows/package-manager/winget/)! Проверить у себя в **PowerShell** установленный **WinGet** командой `winget --info`. Если не установлен, то:
     - Установить [WinGet - Windows Package Manager](https://apps.microsoft.com/detail/9nblggh4nns1?hl=ru-RU&gl=RU) или [с Github](https://github.com/microsoft/winget-cli/releases)
 1. Приложение [Teams](https://teams.microsoft.com/v2/) или браузер [Edge](https://www.microsoft.com/ru-ru/edge/download?form=MA13FW) или в **PowerShell** - `winget install Microsoft.Teams` и `winget install Microsoft.Edge`
-1. **Git** (Git-Bash) [Git-Bash](https://git-scm.com/) или установить в **PowerShell** командой `winget install Git.Git`
+1. **Git** (Git-Bash) [Git-Bash](https://git-scm.com/) или установить в **PowerShell** командой `winget install Git.Git` или `winget install --id Git.Git -e --source winget`
 1. **Micro** - консольный текстовый редактор (требуется для редакторивания слияний в **Git**)
     - Установить в **Windows**:
     ```shell
     winget install --id=zyedidia.micro -e
+    ```
+    или
+    ```shell
+    winget install --id zyedidia.micro -e --source winget
     ```
     - Установить **Ubuntu WSL**:
     ```shell
@@ -72,7 +76,7 @@
 1. Регистрация в [Яндекс](https://ya.ru/) или [VK](https://vk.com/) - для регистрации на [Gitflic.ru](gitflic.ru)
 1. Создать публичный репозиторий с `README.md` на [gitflic.ru](gitflic.ru) или [Github](github.com)
 1. **Dia** [Dia](https://ru.wikipedia.org/wiki/Dia) - `winget install gnome.Dia` (опционально)
-1. **VSCode** [VSCode](https://code.visualstudio.com/) или в **PowerShell** - `winget install Microsoft.VisualStudioCode`
+1. **VSCode** [VSCode](https://code.visualstudio.com/) или в **PowerShell** - `winget install Microsoft.VisualStudioCode` или `winget install --id Microsoft.VisualStudioCode -e --source winget`
 1. [Zed](https://zed.dev/?ref=taaft) - опционально - это высокопроизводительный, многопользовательский редактор кода с открытым исходным кодом со встроенным ИИ.
     - Установка в **Windows** (PowerShell - Администратор):
     ```shell
@@ -89,7 +93,7 @@
 1. **Termux** (для Андроид) [Termux](https://termux.dev/en/) - опционально
 1. Компилятор **gcc** (Для Windows MSYS2) [MSYS2](https://www.msys2.org/) или [Clang](https://releases.llvm.org/download.html)  или в **PowerShell** - `winget install LLVM.LLVM` - опционально
 1. **WSL 2.0** - установить **Ubuntu** - для **Docker** etc. [WSL 2.0 для Windows 10/11](#wsl)
-1. **Docker** - Для **Windows** [Загрузить и установить Docker-Desktop](https://www.docker.com/products/docker-desktop/) или в **PowerShell** - `winget install Docker.DockerDesktop`. [Для Linux](/content/Linux/README.md)
+1. **Docker** - Для **Windows** [Загрузить и установить Docker-Desktop](https://www.docker.com/products/docker-desktop/) или в **PowerShell** - `winget install Docker.DockerDesktop` или `winget install --id Docker.DockerDesktop -e --source winget`. [Для Linux](/content/Linux/README.md)
 1. **Virtual Box** - для установки **Alt Образование 11** - для контроллера домена (групповые политики)
 [Virtual Box](https://www.oracle.com/virtualization/virtualbox/) или в **PowerShell** - `winget install --id=Oracle.VirtualBox -e`
     - [Альт Образование 11 для виртуальной машины](https://download.basealt.ru/pub/distributions/ALTLinux/p11/images/education/x86_64/alt-education-11.0-x86_64.iso) - опционально!
@@ -179,9 +183,10 @@ git config --global user.email "rosa@mail.ru"
             - `sl`
             - `ascii -d`
             - `inxi -F`
-            - `cmatrix`
+            - `cmatrix` - выйти из "матрицы" по клавише **Q**
             - `cacafire`
     - Для старых версий **Windows 10**. **(Не обязательно!)** Если обновления **Ubuntu** завершаться ошибкой, то надо в **Windows PowerShell** (Администратор) задать версию **WSL 2** по умолчанию: `wsl --set-default-version 2`
+    - Для удаления Ubuntu WSL выполнить: `wsl --unregister Unbuntu` и `winget uninstall Ubuntu` и перезагрузить компьютер
 
 > Если компьютер не тянет для **WSL 2.0** и **Docker**, то можно попробовать выполнять задачи в [**Codespace**](https://github.com/features/codespaces) (но не желательно, т.к. очень ограниченный функционал!)
 
