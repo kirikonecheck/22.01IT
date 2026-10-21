@@ -74,7 +74,7 @@
     brew install micro
     ```
 1. Регистрация в [Яндекс](https://ya.ru/) или [VK](https://vk.com/) - для регистрации на [Gitflic.ru](gitflic.ru)
-1. Создать публичный репозиторий с `README.md` на [gitflic.ru](gitflic.ru) или [Github](github.com)
+1. Создать публичный репозиторий с `README.md` на [gitflic.ru](gitflic.ru) или [Github](github.com) (для **GitHub** может понадобиться VPN)
 1. **Dia** [Dia](https://ru.wikipedia.org/wiki/Dia) - `winget install gnome.Dia` (опционально)
 1. **VSCode** [VSCode](https://code.visualstudio.com/) или в **PowerShell** - `winget install Microsoft.VisualStudioCode` или `winget install --id Microsoft.VisualStudioCode -e --source winget`
 1. [Zed](https://zed.dev/?ref=taaft) - опционально - это высокопроизводительный, многопользовательский редактор кода с открытым исходным кодом со встроенным ИИ.
@@ -167,13 +167,14 @@ git config --global user.email "rosa@mail.ru"
     - Перезагрузить компьютер в PowerShell командой `Restart-Computer`
     - Запустить **Windows PowerShell** (Администратор)
     - Проверка подсистемы **WSL 2.0** командой `wsl --version` и `wsl --status`
-    - Обновить **WSL 2.0** командой `wsl --update`
+    - Обновить **WSL 2.0** командой `wsl --update` или `wsl --update --web-download`
     - Установить **Ubuntu** `wsl --install`
         - Когда система предложит указать имя пользователя **UNIX**, надо указать `user` и **Enter**
         - Пароль польователя user - `123` (при наборе пароля он никак не отображается, но всё равно набирается) и **Enter**. Повтори пароль и **Enter**
         - Перезагрузить компьютер
             - После перезагрузки найти **Ubuntu** можно из **Главного меню** и запустить её как обычное приложение **Windows**
             - Обновить **Ubuntu**: в терминале **Ubuntu** запустить команду `sudo apt list --upgradable -a && sudo apt update && sudo apt full-upgrade -y`
+            - Если забыли пароль от **Ubuntu**, `passwd имя_пользователя` (получить имя пользователя Ubuntu командой `ls /home`)
             - Установить дополнительные утилиты в **Ubuntu**: в терминале **Ubuntu** запустить команду `sudo apt update && sudo apt install -y mc htop tree whois sl fastfetch wget curl inxi ncdu micro xclip xsel cmatrix caca-utils lm-sensors nyancat net-tools`
             - Установить поддержку `g++` и `clang++` в терминале **Ubuntu**: `sudo apt update && sudo apt install -y build-essential git gdb ascii clang mingw-w64`
             - Проверить работу **Ubuntu** командами:
