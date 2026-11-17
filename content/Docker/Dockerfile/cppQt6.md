@@ -25,6 +25,10 @@ qt6-docker-app/
 ```shell
 mkdir -p qt6-docker-app && touch qt6-docker-app/Dockerfile qt6-docker-app/main.cpp qt6-docker-app/CMakeLists.txt && cd qt6-docker-app
 ```
+после этого обновите Ubuntu WSL
+```shell
+sudo apt list --upgradable -a && sudo apt update && sudo apt full-upgrade -y
+```
 
 ### 2. Содержимое файла `Dockerfile`
 ```dockerfile
@@ -73,7 +77,7 @@ COPY CMakeLists.txt main.cpp ./
 RUN cmake -B build -S . -G Ninja && \
     cmake --build build --parallel
 ENV QT_QPA_PLATFORM=xcb
-CMD ["./build/qt6_app"]
+CMD ["./build/qt6-app"]
 ```
 
 ### 3. Содержимое файла `CMakeLists.txt`
@@ -86,8 +90,8 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
-add_executable(qt6_app main.cpp)
-target_link_libraries(qt6_app Qt6::Core Qt6::Widgets)
+add_executable(qt6-app main.cpp)
+target_link_libraries(qt6-app Qt6::Core Qt6::Widgets)
 ```
 
 ### 4. Содержимое файла `main.cpp` (простое Qt-приложение)
@@ -123,6 +127,10 @@ int main(int argc, char *argv[])
 
 ### 5. Сборка и запуск
 
+Активировать группу без перезагрузки (дать временные права на выполнение нужных команд в WSL):
+```shell
+newgrp docker
+```
 В командной строке **VS Code+WSL**, находясь в папке `qt6-docker-app`, выполнить:
 ```shell
 docker build -t qt6-app .
@@ -134,6 +142,10 @@ docker run -it --rm \
   -e DISPLAY=$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   qt6-app
+```
+Если возникнет ошибка, то перед новой попыткой выполните (для linux):
+```shell
+xhost +local:docker
 ```
 
 Создание и запуск контейнера для **macOS** (не проверял!)

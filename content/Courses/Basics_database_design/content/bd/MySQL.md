@@ -24,18 +24,29 @@ InnoDB
 <a id="docker"></a>
 ### 🚀 Шаг 1: Запуск контейнера MySQL
 
-- Создайте отдельный каталог `my-mysql` и перейдите в него.
-- Создайте в каталоге `my-mysql` файл `my.cnf` с содержимым:
+- Создайте отдельный каталог `my-mysql` и перейдите в него (`cd my-mysql`).
+- Создайте в каталоге `my-mysql` файл `my.cnf` с содержимым (на забудьте перейти в папку `my-mysql`):
 ```shell
 [mysqld]
 character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_ci
+general_log = 1
+general_log_file = /var/lib/mysql/general.log
+log_output = FILE
 
 [client]
 default-character-set = utf8mb4
 
 [mysql]
 default-character-set = utf8mb4
+```
+В каталоге `my-mysql` создайте папку `logs` для логов
+```shell
+mkdir -p logs
+```
+создать файл `general.log` для ведения журнала действий в БД
+```shell
+touch general.log
 ```
 Контейнер с официального образа **MySQL**:
 ```bash
@@ -46,7 +57,6 @@ docker run --name my-mysql \
   -v $(pwd)/my.cnf:/etc/mysql/conf.d/my.cnf \
   -d mysql:latest
 ```
-
 Разберем, что делает эта команда:
 *   `--name my-mysql`: Присваивает контейнеру понятное имя `my-mysql`, чтобы не использовать его ID.
 *   `-e MYSQL_ROOT_PASSWORD=123`: Устанавливает пароль для пользователя root. В учебном примере — 123, в реальных проектах используйте надёжный пароль.
@@ -112,6 +122,29 @@ SHOW DATABASES;
 Получить краткую справку по командам СУБД **MySQL**
 ```sql
 help
+```
+
+Фильтр таблиц для лога
+```sql
+SELECT event_time, command_type, argument
+FROM mysql.general_log
+WHERE user_host LIKE 'root@%'
+ORDER BY event_time DESC;
+```
+и
+```sql
+SELECT event_time, command_type, argument
+FROM mysql.general_log
+WHERE user_host LIKE 'root@%'
+  AND argument NOT LIKE 'SET NAMES%'
+  AND argument NOT LIKE 'SHOW VARIABLES%'
+  AND argument NOT LIKE 'SELECT @@%'
+  AND argument NOT LIKE 'SET SESSION sql_log_off%'  -- на всякий случай
+ORDER BY event_time DESC;
+```
+и
+```sql
+SET SESSION sql_log_off = ON;
 ```
 
 Создадим базу данных с именем `my_database` с таблицей `users`. Рекомендуется сразу указывать кодировку:
@@ -252,19 +285,22 @@ quit
 
 ### 🧹 Шаг 4: Управление контейнером
 
-*   **Остановка контейнера:**
-    ```bash
-    docker stop my-mysql
-    ```
-*   **Запуск ранее остановленного контейнера:**
-    ```bash
-    docker start my-mysql
-    ```
-*   **Просмотр логов (может пригодиться для отладки):**
-    ```bash
-    docker logs my-mysql
-    ```
-
+**Остановка контейнера:**
+```bash
+docker stop my-mysql
+```
+**Запуск ранее остановленного контейнера:**
+```bash
+docker start my-mysql
+```
+**Просмотр логов (может пригодиться для отладки):**
+```bash
+docker logs my-mysql
+```
+**Просмотр логов с перенаправлением в файл**
+```shell
+docker logs my-mysql > log.txt
+```
 Если нужно пересоздать контейнер с сохранением данных:
 ```shell
 docker stop my-mysql
@@ -364,7 +400,7 @@ orders.ibd
 ## ✍️ Шаг 3: Вставка данных (INSERT)
 
 Вернуться в базу данных
-```sql
+```shell
 docker exec -it my-mysql mysql --default-character-set=utf8mb4 -uroot -p
 ```
 Использовать указанную БД
@@ -380,8 +416,7 @@ SHOW TABLES;
 SELECT * FROM customers;
 SELECT * FROM orders;
 ```
-
-и вставить эту инструкцию
+и выполнить эту инструкцию
 ```sql
 INSERT INTO customers (name, email, city) VALUES
   ('Иван Иванов', 'ivan@example.com', 'Москва'),
@@ -578,7 +613,7 @@ SELECT c.name, o.id AS order_id
 FROM customers c
 RIGHT JOIN orders o ON c.id = o.customer_id;
 ```
-RIGHT JOIN (правое внешнее соединение) — возвращает все строки из правой таблицы, даже если нет совпадений в левой.
+**RIGHT JOIN** (правое внешнее соединение) — возвращает все строки из правой таблицы, даже если нет совпадений в левой.
 
 Результат: все строки из правой таблицы (orders) + совпадения из левой (customers). Если у заказа нет клиента — в поле c.name будет NULL.
 
@@ -738,7 +773,28 @@ SELECT * FROM orders WHERE id = 3;
 
 <a id="dump"></a>
 
-### 8.4. Создание дампа
+### 8.4. Создание лога и дампа
+
+Как проверить, что лог пишется
+```shell
+docker exec my-mysql ls -la /var/lib/mysql/general.log
+```
+Должен быть примерно такой вывод:
+```shell
+-rw-r----- 1 mysql mysql 3265 Nov  3 08:46 /var/lib/mysql/general.log
+```
+заглянуть в него:
+```shell
+docker exec my-mysql cat /var/lib/mysql/general.log
+```
+забрать лог на хост
+```shell
+docker cp my-mysql:/var/lib/mysql/general.log ./general.log
+```
+Очистка лога внутри контейнера
+```shell
+docker exec my-mysql sh -c ': > /var/lib/mysql/general.log'
+```
 
 Создание дампа БД (Экспорт в `.sql` файл)
 
@@ -766,11 +822,11 @@ cat dump.sql
 
 ---
 
-## 🗑️ Шаг 10: Удаление данных (DELETE)
+## 🗑️ Шаг 10: Удаление и изменение данных (DELETE)
 
 
 Снова зайти в конейнер с БД
-```sql
+```shell
 docker exec -it my-mysql mysql --default-character-set=utf8mb4 -uroot -p
 ```
 выбрать БД
@@ -870,7 +926,7 @@ docker start my-mysql
 ```shell
 ls -lh dump.sql
 ```
-Файл должен быть в текущей директории, где вы его создавали. Если размер 0 байт — дамп пустой, восстанавливать нечего. Убедитесь, что вы находитесь в той же папке, где запускали mysqldump, либо укажите полный путь
+Файл должен быть в текущей директории, где вы его создавали. Если размер 0 байт — дамп пустой, восстанавливать нечего. Убедитесь, что вы находитесь в той же папке, где запускали mysqldump, либо укажите полный путь.
 
 Быстрая проверка содержимого:
 ```shell
@@ -894,11 +950,7 @@ SHOW DATABASES;
 ```sql
 \q
 ```
-Команда импорта выполняется не внутри mysql, а в обычном терминале хоста:
-```shell
-docker exec -i my-mysql mysql -uroot -p123 sql_practice < dump.sql
-```
-или (с игнорированием ошибок импорта)
+Команда импорта выполняется не внутри mysql, а в обычном терминале хоста (с игнорированием ошибок импорта):
 ```shell
 docker exec -i my-mysql mysql -uroot -p123 --force sql_practice < dump.sql
 ```

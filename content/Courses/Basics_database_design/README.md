@@ -2,11 +2,14 @@
 
 ## Навигация по предмету
 
+- [Вопросы к экзамену](/content/Courses/Basics_database_design/questions.md)
+
 Теория
 - [Данные](/content/Courses/Basics_database_design/content/Data.md)
 - [Основы проектирования баз данных](/content/Courses/Basics_database_design/content/Begin.md)
 - [Классификация Баз Данных](/content/Courses/Basics_database_design/content/All_db.md)
 - [ER-диаграмы](/content/Courses/Basics_database_design/content/ER_dia.md)
+- [«Команды» и «запросы» в SQL: в чём разница](/content/Courses/Basics_database_design/content/Docs/Command_or_request.md)
 - [Алиасы в SQL](/content/Courses/Basics_database_design/content/Docs/Aliases.md)
 - [Дамп БД](/content/Courses/Basics_database_design/content/Docs/dump.md)
 - [Оператор `IN` в SQL](/content/Courses/Basics_database_design/content/Docs/IN.md)
@@ -14,18 +17,55 @@
 - [Теория множеств и базы данных](/content/Courses/Basics_database_design/content/Docs/set_theory.md)
 - [Понятие кортежа в БД](/content/Courses/Basics_database_design/content/Docs/tuple.md)
 - [Файлы БД](/content/Courses/Basics_database_design/content/Docs/SQL_File.md)
-- []()
+- [Нормализация данных: простое руководство с примерами](/content/Courses/Basics_database_design/content/Docs/data_normalization.md)
+- [Представления (VIEW) в MySQL: подробное руководство](/content/Courses/Basics_database_design/content/Docs/VIEW.md)
+- [Лог MySQL](/content/Courses/Basics_database_design/content/Docs/log.md)
+- [Основные движки MySQL и их назначение](/content/Courses/Basics_database_design/content/Docs/storage_engine.md)
+- [Краткий обзор движков таблиц MySQL](https://habr.com/ru/articles/64851/)
+- [InnoDB](/content/Courses/Basics_database_design/content/Docs/InnoDB.md)
+- [Индексы](/content/Courses/Basics_database_design/content/Docs/Index.md)
+- [EXPLAIN](/content/Courses/Basics_database_design/content/Docs/EXPLAIN.md)
+- [Транзакции]()
+- [Подзапросы]()
+- [Управление пользователями и правами]()
+- [Резервное копирование и восстановление]()
+- [Безопасность БД]()
 
 
 ### Практика
 
 - Docker
-  - [Подробные уроки по Docker для начинающих](https://gitflic.ru/project/rurewa/altlinux/blob?file=content%2FDocker%2FDocker.md&branch=master&mode=markdown)
-  - [Работа с базой данных внутри контейнера](/content/Basics_database_design/db_base.md)
+  - [Docker для начинающих](/content/Docker/getDocker.md)
+  - [Шпаркагла по Docker](/content/Docker/DockerReminder.md)
 - Базы Данных
-  - [Интерактивная работа с MySQL в изолированном окружении Docker](/content/Courses/Basics_database_design/content/Content/MySQL.md)
+  - [Интерактивная работа с MySQL в изолированном окружении Docker № 1](/content/Courses/Basics_database_design/content/bd/Begin_MySQL_1.md)
+  - [Интерактивная работа с MySQL в изолированном окружении Docker № 2](/content/Courses/Basics_database_design/content/bd/Begin_MySQL_2.md)
   - [Основные операции на примере двух таблиц «products 1» и «products 2»](/content/Courses/Basics_database_design/content/bd/Products.md)
   - [Руководство по представлениям (VIEW) в MySQL](/content/Courses/Basics_database_design/content/bd/VIEW_MySQL.md)
+  - [Лабораторная # 1 работа по нормализации данных в БД (с ведением лога)](/content/Courses/Basics_database_design/content/bd/Normalization_1.md)
+  - [Лабораторная # 2 работа по нормализации данных в БД (с ведением лога)](/content/Courses/Basics_database_design/content/bd/Normalization_2.md)
+  - [Лабораторная # 3 работа по нормализации данных в БД (с ведением лога)](/content/Courses/Basics_database_design/content/bd/Normalization_3.md)
+  - [Лабораторная # 4 работа по нормализации данных в БД (с ведением лога)](/content/Courses/Basics_database_design/content/bd/Normalization_4.md)
+  - [Лабораторная # 5 работа по нормализации данных в БД (с ведением лога)](/content/Courses/Basics_database_design/content/bd/Normalization_5.md)
+  - [Лабораторная работа по Алиасам в MySQL](/content/Courses/Basics_database_design/content/bd/Aliases.md)
+  - [Индексы в MySQL. Практическое руководство (с ведением лога)](/content/Courses/Basics_database_design/content/bd/Index.md)
+  - [Полнотекстовый поиск (FULLTEXT) в MySQL. Практическое руководство](/content/Courses/Basics_database_design/content/bd/FULLTEXT.md)
+  - [Ускорение сортировки и группировки в MySQL (ORDER BY / GROUP BY)](/content/Courses/Basics_database_design/content/bd/ORDER_BY_GROUP_BY.md)
+
+После освоения базовых операций SQL, представлению View и нормализации таблиц, что ещё надо освоить в Базах данных?
+
+***
+
+Полезные ссылки:
+
+- [Air flights database analysis](https://github.com/igsuvorov/Air_flights_database_analysis?ysclid=mw0buiq89f403052923)
+- [Демонстрационная база данных](https://postgrespro.ru/education/demodb?ysclid=mw0btgkgnm893794791)
+- [test_db](https://github.com/datacharmer/test_db?ysclid=mw0bxj6m4109233723)
+- [Памятка/шпаргалка по SQL](https://habr.com/ru/articles/564390/)
+- [LibreDB Studio](https://www.opennet.ru/opennews/art.shtml?num=66216)
+- [Практическое владение языком SQL](https://sql-ex.ru/)
+- [Создание ER-диаграмм](https://app.diagrams.net/)
+- [Тренажёр SQL ](https://sql.coderang.dev/)
 
 
 ---
@@ -225,12 +265,6 @@
 
 Понимание этих основных понятий является абсолютно необходимым для грамотного и эффективного проектирования любой базы данных.
 
-### Полезные Ссылки
-
-- [Памятка/шпаргалка по SQL](https://habr.com/ru/articles/564390/)
-- [LibreDB Studio](https://www.opennet.ru/opennews/art.shtml?num=66216)
-- [Практическое владение языком SQL](https://sql-ex.ru/)
-- [Создание ER-диаграмм](https://app.diagrams.net/)
-- [Тренажёр SQL ](https://sql.coderang.dev/)
+- [Вопросы к экзамену](/content/Courses/Basics_database_design/questions.md)
 
 > Если вы обнаружили ошибку в этом тексте - сообщите пожалуйста автору!
